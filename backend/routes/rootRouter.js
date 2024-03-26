@@ -1,12 +1,12 @@
-// backend/api/index.js
+
 const express = require('express');
 const router = express.Router();
+const userRouter = require('./user')
+const accountRouter = require('./account')
 // If we want to import a router inside a router we will use : router.use('/route',call)
 
-const { signup, signin } = require('../controllers/auth')
-
-router.post('/user/signup', signup);
-router.post('/user/signin', signin);
+router.use('/user', userRouter);
+router.use('/account', accountRouter);
 
 
 module.exports = router;

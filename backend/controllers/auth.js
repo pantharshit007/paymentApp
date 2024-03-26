@@ -2,9 +2,9 @@ require('dotenv').config();
 const JWT_SECRET = process.env.JWT_SECRET;
 const zod = require('zod');
 const jwt = require('jsonwebtoken');
-const userSchema = require('../models/userSchema')
+const { User, Account } = require('../models/userSchema')
 
-async function signup(req, res, next) {
+async function signup(req, res) {
     //validating inputs
     const signupBody = zod.object({
         username: zod.string().email(),
@@ -25,7 +25,7 @@ async function signup(req, res, next) {
         const { username, password, firstName, lastName } = req.body;
 
         //checking if user is already exists in the database
-        const isAlreadyExists = await userSchema.findOne({
+        const isAlreadyExists = await User.findOne({
             username: username
         });
 
@@ -37,7 +37,8 @@ async function signup(req, res, next) {
         }
 
         //create a new User in dB
-        const newUser = await userSchema.create({
+        //////TODO: HASH THE PASSWORD BEFORE ADDING TO DB
+        const newUser = await User.create({
             username,
             password,
             firstName,
@@ -45,6 +46,12 @@ async function signup(req, res, next) {
         })
 
         const userId = newUser._id;
+
+        //Adding random balance in new Users Account: 1-10,000
+        await Account.create({
+            userId,
+            balance: 1 + Math.random() * 10_000
+        })
 
         //creating JWT token for the new user
         const token = jwt.sign({
@@ -67,11 +74,43 @@ async function signup(req, res, next) {
     }
 }
 
-async function signin(req, res, next) {
+async function signin(req, res) {
+    // validating inputs
+    const signinBody = zod.object({
+        username: zod.string().email(),
+        password: zod.string()
+    })
+
     try {
+        const { success } = signinBody.safeParse(req.body)
+        if (!success) {
+            return res.status(411).json({
+                success: false,
+                message: "> Incorrect inputs"
+            })
+        }
+
+        const { username, password } = req.body;
+
+        const userExists = await User.findOne({
+            username,
+            password
+        });
+
+        if (userExists) {
+            const token = jwt.sign({
+                userId: userExists._id
+            }, JWT_SECRET)
+
+            return res.status(200).json({
+                success: true,
+                message: "> Login successfully!",
+                token: token,
+            })
+        }
 
     } catch (err) {
-        console.log("> Error While Creating User: " + err.message)
+        console.log("> Error While Signing User: " + err.message)
         return res.status(500).json({
             success: false,
             msg: "" + err.message,
@@ -80,12 +119,12 @@ async function signin(req, res, next) {
     }
 }
 
-async function login(req, res, next) {
+async function login(req, res) {
     try {
 
     } catch (err) {
         console.log("> Error While Creating User: " + err.message)
-        return res.status(500).json({
+        return res.status(411).json({
             success: false,
             msg: "" + err.message,
 
