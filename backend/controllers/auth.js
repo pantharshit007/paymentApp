@@ -50,7 +50,7 @@ async function signup(req, res) {
         //Adding random balance in new Users Account: 1-10,000
         await Account.create({
             userId,
-            balance: 1 + Math.random() * 10_000
+            balance: (1 + Math.random() * 10_000).toFixed(2)
         })
 
         //creating JWT token for the new user

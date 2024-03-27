@@ -6,7 +6,8 @@ async function auth(req, res, next) {
     try {
         const token = req.header("Authorization").split(" ")[1] || req.body.token;
 
-        if (!token || !req.headers.authorization.startswith("Bearer ")) {
+        const authHeader = req.headers.authorization;
+        if (!token || !authHeader.startsWith('Bearer ')) {
             return res.status(401).json({
                 success: false,
                 msg: 'token missing'
