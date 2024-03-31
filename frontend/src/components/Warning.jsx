@@ -7,7 +7,7 @@ function Warning({ label, btnText, destination }) {
             <div>
                 {label}
             </div>
-            <Link className="pointer underline pl-1 cursor-pointer" to={destination}>
+            <Link className="pointer underline pl-1 cursor-pointer text-pay-default" to={destination}>
                 {btnText}
             </Link>
         </div>

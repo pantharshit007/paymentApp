@@ -1,5 +1,5 @@
 const zod = require('zod');
-const userSchema = require('../models/userSchema')
+const { User } = require('../models/userSchema')
 
 async function userUpdate(req, res) {
     const updateBody = zod.object({
@@ -17,7 +17,7 @@ async function userUpdate(req, res) {
         }
 
         // Update based on user's ID (_id)
-        await userSchema.updateOne({ _id: req.userId }, req.body);
+        await User.updateOne({ _id: req.userId }, req.body);
 
         return res.status(200).json({
             success: true,
@@ -37,7 +37,7 @@ async function getUserInfo(req, res) {
     try {
         const filter = req.query.filter || '';
 
-        const users = await userSchema.find({
+        const users = await User.find({
             $or: [{
                 firstName: {
                     "$regex": filter

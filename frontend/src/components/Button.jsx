@@ -2,10 +2,10 @@ import React from 'react'
 
 function Button({ label, onClick }) {
     return (
-        <div className='pt-4'>
-            <button class="w-full text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2"
-                type="button" onClick={onClick}>{label}</button>
-        </div>
+
+        <button className="w-full text-white bg-pay-light hover:bg-pay-default focus:outline-none focus:scale-95  font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2"
+            type="button" onClick={onClick}>{label}</button>
+
     )
 }
 
