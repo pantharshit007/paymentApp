@@ -16,7 +16,7 @@ async function signup(req, res) {
     try {
         const { success } = signupBody.safeParse(req.body);
         if (!success) {
-            res.status(411).json({
+            return res.status(411).json({
                 success: false,
                 msg: 'Email already taken/ Incorrect Inputs'
             })
@@ -113,7 +113,7 @@ async function signin(req, res) {
         console.log("> Error While Signing User: " + err.message)
         return res.status(500).json({
             success: false,
-            msg: "" + err.message,
+            msg: "Error While Signing User: " + err.message,
 
         })
     }

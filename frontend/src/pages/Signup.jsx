@@ -5,10 +5,12 @@ import InputBox from '../components/InputBox'
 import Button from '../components/Button'
 import Warning from '../components/Warning'
 import { useNavigate } from 'react-router-dom'
+import axios from 'axios'
+import toast, { Toaster } from 'react-hot-toast';
 
 function Signup() {
     const navigate = useNavigate();
-    const URL = "http://localhost:4000/signup";
+    const URL = "http://localhost:4000/api/v1/user/signup";
 
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
@@ -16,16 +18,40 @@ function Signup() {
     const [password, setPassword] = useState('');
 
     async function submitHandler() {
-        const response = await axios.post(URL, {
+        // Input validation
+        if (!firstName || !lastName || !username || !password || password.length < 6) {
+            toast.error('Wrong Input! Try Again.')
+            return;
+        }
+
+        const requestData = {
             firstName,
             lastName,
             username,
             password
-        });
+        };
 
-        //storing token in LocaStorage
-        localStorage.setItem('token', response.data.token);
-        navigate("/dashboard")
+        try {
+            const response = await axios.post(URL, requestData);
+
+            if (response.data.success) {
+                //storing token in LocaStorage
+                localStorage.setItem('token', response.data.token);
+                // console.log("check: " + response.data.token);
+                toast.success('Account Created Successfully!')
+                navigate("/dashboard")
+            }
+            // else {
+            //     console.log("error: " + response.data.msg);
+            //     toast.error("Error: " + response.data.msg);
+            //     toast.warning('Please Check your Info')
+            // }
+        } catch (error) {
+            console.error('Error:', error.message);
+            toast.error('Email already in Use.');
+        }
+
+
     }
 
     return (
@@ -45,8 +71,12 @@ function Signup() {
                         onChange={(e) => setPassword(e.target.value)} />
 
                     <div className='pt-4'>
-                        <Button label={"Sign Up"} onClick={() => submitHandler} />
+                        <Button label={"Sign Up"} onClick={() => submitHandler()} />
                     </div>
+                    <Toaster
+                        position="top-center"
+                        reverseOrder={false}
+                    />
                     <Warning label={"Already have an Account?"} btnText={"Sign In"} destination={"/Signin"} />
                 </div>
             </div>

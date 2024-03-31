@@ -29,7 +29,7 @@ function Users() {
             </div>
             <div>
                 {
-                    userInfo.map((user) => <UserCard user={user} />)
+                    userInfo.map((user) => <UserCard user={user} key={user._id} />)
                 }
             </div>
         </div>
