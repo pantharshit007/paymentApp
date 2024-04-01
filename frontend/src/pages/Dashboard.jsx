@@ -1,13 +1,35 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import NavBar from '../components/NavBar'
 import Balance from '../components/Balance'
 import Users from '../components/Users'
+import axios from 'axios'
 
 function Dashboard() {
+    const [balance, setBalance] = useState("00")
+
+    useEffect(() => {
+        const URL = "http://localhost:4000/api/v1/account/balance"
+        const token = localStorage.getItem('token')
+        axios.get(URL, {
+            headers: {
+                Authorization: "Bearer " + token
+            }
+        })
+            .then(response => {
+                if (response.status === 200) {
+                    setBalance(response.data.balance);
+                }
+            })
+            .catch(error => {
+                console.error('Error fetching balance:', error.message);
+            });
+    }, []);
+
+
     return (
         <div>
             <NavBar />
-            <Balance amount={'10,000'} />
+            <Balance amount={balance} />
             <div className='w-10/12 mx-auto'>
                 <Users />
             </div>

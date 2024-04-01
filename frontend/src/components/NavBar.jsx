@@ -1,10 +1,12 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 function NavBar() {
     return (
         <div className='flex justify-between bg-pay-dark h-14'>
-            <div className='flex justify-center items-center ml-4 text-white font-semibold'>
-                PayTM App
+            <div className='flex justify-center items-center ml-4 text-white font-semibold pointer'>
+                <Link to={'/'}>PayTM App</Link>
+
             </div>
             <div className='flex  '>
                 <div className='mr-4 h-full flex justify-center items-center text-white'>
