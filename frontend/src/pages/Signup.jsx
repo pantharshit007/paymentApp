@@ -34,24 +34,22 @@ function Signup() {
         try {
             const response = await axios.post(URL, requestData);
 
+            //storing token in LocaStorage
             if (response.data.success) {
-                //storing token in LocaStorage
                 localStorage.setItem('token', response.data.token);
                 // console.log("check: " + response.data.token);
                 toast.success('Account Created Successfully!')
                 navigate("/dashboard")
             }
-            // else {
-            //     console.log("error: " + response.data.msg);
-            //     toast.error("Error: " + response.data.msg);
-            //     toast.warning('Please Check your Info')
-            // }
+
         } catch (error) {
-            console.error('Error:', error.message);
-            toast.error('Email already in Use.');
+            if (error.response && error.response.status === 411) {
+                toast.error('Email already in Use.');
+            } else {
+                console.error('Error:', error.message);
+                toast.error('Error:', error.message);
+            }
         }
-
-
     }
 
     return (
