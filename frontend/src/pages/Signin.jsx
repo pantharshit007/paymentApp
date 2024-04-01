@@ -10,6 +10,7 @@ import toast from 'react-hot-toast';
 
 function Signin() {
     const navigate = useNavigate();
+    const [showBox, setShowBox] = useState(false);
     const URL = "http://localhost:4000/api/v1/user/signin";
 
     const [username, setUsername] = useState('');
@@ -52,7 +53,7 @@ function Signin() {
                     <SubHeading label={"Enter Credentials to access your account"} />
 
                     <form onSubmit={submitHandler}>
-                        <InputBox label={"Email"} placeholder={"pantharshit007@gmail.com"}
+                        <InputBox label={"Username"} placeholder={"pantharshit007@gmail.com"}
                             onChange={(e) => setUsername(e.target.value)} />
                         <InputBox label={"Password"} placeholder={"123456"}
                             onChange={(e) => setPassword(e.target.value)} />
@@ -62,6 +63,19 @@ function Signin() {
                     </form>
 
                     <Warning label={"Don't have an Account?"} btnText={"Sign Up"} destination={"/Signup"} />
+                </div>
+
+                {/* Sample Login Credential */}
+                <div className=' text-2xl text-white cursor-pointer h-min'
+                    onClick={() => setShowBox(!showBox)} > ⓘ </div>
+                <div className={` top-0  bg-blue-50  h-min w-min py-2 px-3 ${showBox ? 'block' : 'hidden'}`}>
+                    <p className='font-semibold text-red-600'>Sample Credentials:</p>
+                    <code className='text-pay-default'>
+                        {`
+                        username: demouser1@gmail.com
+                        password: 123456
+                        `}
+                    </code>
                 </div>
             </div>
         </div>
