@@ -17,10 +17,11 @@ function Signup() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
-    async function submitHandler() {
+    async function submitHandler(event) {
+        event.preventDefault();
         // Input validation
         if (!firstName || !lastName || !username || !password || password.length < 6) {
-            toast.error('Wrong Input! Try Again.')
+            toast.error('Wrong Input! or Empty field')
             return;
         }
 
@@ -36,8 +37,9 @@ function Signup() {
 
             //storing token in LocaStorage
             if (response.data.success) {
+                localStorage.setItem('isLoggedIn', true);
                 localStorage.setItem('token', response.data.token);
-                // console.log("check: " + response.data.token);
+
                 toast.success('Account Created Successfully!')
                 navigate("/dashboard")
             }
@@ -55,18 +57,21 @@ function Signup() {
                     <Heading label={"Sign Up"} />
                     <SubHeading label={"Enter Info to Create Account"} />
 
-                    <InputBox label={"First Name"} placeholder={"Harshit"}
-                        onChange={(e) => setFirstName(e.target.value)} />
-                    <InputBox label={"Last Name"} placeholder={"Pant"}
-                        onChange={(e) => setLastName(e.target.value)} />
-                    <InputBox label={"username"} placeholder={"pantharshit007@gmail.com"}
-                        onChange={(e) => setUsername(e.target.value)} />
-                    <InputBox label={"Password"} placeholder={"123456"}
-                        onChange={(e) => setPassword(e.target.value)} />
+                    <form onSubmit={submitHandler}>
+                        <InputBox label={"First Name"} placeholder={"Harshit"}
+                            onChange={(e) => setFirstName(e.target.value)} />
+                        <InputBox label={"Last Name"} placeholder={"Pant"}
+                            onChange={(e) => setLastName(e.target.value)} />
+                        <InputBox label={"username"} placeholder={"pantharshit007@gmail.com"}
+                            onChange={(e) => setUsername(e.target.value)} />
+                        <InputBox label={"Password"} placeholder={"123456"}
+                            onChange={(e) => setPassword(e.target.value)} />
 
-                    <div className='pt-4'>
-                        <Button label={"Sign Up"} onClick={() => submitHandler()} />
-                    </div>
+                        <div className='pt-4'>
+                            <Button label={"Sign Up"} type={'submit'} />
+                        </div>
+                    </form>
+
                     <Toaster
                         position="top-center"
                         reverseOrder={false}

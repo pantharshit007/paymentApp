@@ -15,7 +15,8 @@ function Signin() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
-    async function submitHandler() {
+    async function submitHandler(event) {
+        event.preventDefault();
         try {
             // Input validation
             if (!username || !password || password.length < 6) {
@@ -28,9 +29,10 @@ function Signin() {
                 password: password,
             });
 
-            console.log(response)
             if (response.data.success) {
+                localStorage.setItem('isLoggedIn', true);
                 localStorage.setItem('token', response.data.token);
+
                 toast.success('Login Successfully!');
                 navigate("/dashboard");
             } else {
@@ -48,13 +50,17 @@ function Signin() {
                 <div className="rounded-lg bg-white w-96 text-center p-2 h-max px-4 ">
                     <Heading label={"Sign In"} />
                     <SubHeading label={"Enter Credentials to access your account"} />
-                    <InputBox label={"Email"} placeholder={"pantharshit007@gmail.com"}
-                        onChange={(e) => setUsername(e.target.value)} />
-                    <InputBox label={"Password"} placeholder={"123456"}
-                        onChange={(e) => setPassword(e.target.value)} />
-                    <div className='pt-4'>
-                        <Button label={"Sign In"} onClick={() => submitHandler()} />
-                    </div>
+
+                    <form onSubmit={submitHandler}>
+                        <InputBox label={"Email"} placeholder={"pantharshit007@gmail.com"}
+                            onChange={(e) => setUsername(e.target.value)} />
+                        <InputBox label={"Password"} placeholder={"123456"}
+                            onChange={(e) => setPassword(e.target.value)} />
+                        <div className='pt-4'>
+                            <Button label={"Sign In"} type={'submit'} />
+                        </div>
+                    </form>
+
                     <Warning label={"Don't have an Account?"} btnText={"Sign Up"} destination={"/Signup"} />
                 </div>
             </div>
