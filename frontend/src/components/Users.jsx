@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import UserCard from './UserCard'
 import axios from 'axios'
 
-function Users() {
+function Users({ userId }) {
     const URL = "http://localhost:4000/api/v1/user/bulk?filter="
     const [userInfo, setUserInfo] = useState([])
     const [filter, setFilter] = useState('')
@@ -10,9 +10,12 @@ function Users() {
     useEffect(() => {
         axios.get(URL + filter)
             .then(response => {
-                setUserInfo(response.data.user)
+                const allUsers = response.data.user;
+                // Filter out the logged-in user from the list
+                const filteredUsers = allUsers.filter(user => user.id !== userId);
+                setUserInfo(filteredUsers);
             })
-    }, [filter]);
+    }, [filter, userId]);
 
     return (
         <div>

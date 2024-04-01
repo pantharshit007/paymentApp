@@ -16,26 +16,30 @@ function Signin() {
     const [password, setPassword] = useState('');
 
     async function submitHandler() {
-        // Input validation
-        if (!username || !password || password.length < 6) {
-            toast.error('Wrong Credentials! Try Again.')
-            return;
-        }
+        try {
+            // Input validation
+            if (!username || !password || password.length < 6) {
+                toast.error('Wrong Credentials! Try Again.');
+                return;
+            }
 
-        const response = await axios.post(URL, {
-            username: username,
-            password: password,
-        })
-        console.log(response.data.token);
-        toast.success('Login Successfully!')
-        if (response.data.success) {
-            localStorage.setItem('token', response.data.token);
-            navigate("/dashboard")
-        } else {
-            toast.error('Wrong Credentials! Try Again.')
-            return;
-        }
+            const response = await axios.post(URL, {
+                username: username,
+                password: password,
+            });
 
+            console.log(response)
+            if (response.data.success) {
+                localStorage.setItem('token', response.data.token);
+                toast.success('Login Successfully!');
+                navigate("/dashboard");
+            } else {
+                toast.error('Wrong Credentials! Try Again.');
+            }
+        } catch (error) {
+            console.error('Error occurred during sign in:', error.response.data);
+            toast.error(error.response.data.message);
+        }
     }
 
     return (

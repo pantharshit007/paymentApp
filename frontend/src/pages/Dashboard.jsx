@@ -6,6 +6,8 @@ import axios from 'axios'
 
 function Dashboard() {
     const [balance, setBalance] = useState("00")
+    const [loggedInUserId, setLoggedInUserId] = useState(null)
+    const [username, setUsername] = useState('')
 
     useEffect(() => {
         const URL = "http://localhost:4000/api/v1/account/balance"
@@ -18,6 +20,9 @@ function Dashboard() {
             .then(response => {
                 if (response.status === 200) {
                     setBalance(response.data.balance);
+                    setLoggedInUserId(response.data.id);
+                    setUsername(response.data.firstName);
+                    // console.log(response.data);
                 }
             })
             .catch(error => {
@@ -28,10 +33,10 @@ function Dashboard() {
 
     return (
         <div>
-            <NavBar />
+            <NavBar username={username} />
             <Balance amount={balance} />
             <div className='w-10/12 mx-auto'>
-                <Users />
+                <Users userId={loggedInUserId} />
             </div>
         </div>
     )

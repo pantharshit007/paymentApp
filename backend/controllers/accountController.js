@@ -1,12 +1,14 @@
 const mongoose = require('mongoose');
 const zod = require('zod')
 
-const { Account } = require('../models/userSchema');
+const { Account, User } = require('../models/userSchema');
 
 async function getBalance(req, res) {
     try {
         const userId = req.userId
         const account = await Account.findOne({ userId: userId });
+        //for FE navbar
+        const user = await User.findOne({ _id: userId });
 
         // for cases/users where we didn't make a account
         if (!account.balance) {
@@ -21,6 +23,8 @@ async function getBalance(req, res) {
         return res.status(200).json({
             success: true,
             msg: 'balance Fetched successfully',
+            id: userId,
+            firstName: user.firstName,
             balance: account.balance
         })
 

@@ -68,7 +68,7 @@ async function signup(req, res) {
         console.log("> Error While Creating User: " + err.message)
         return res.status(500).json({
             success: false,
-            msg: "> Error While Creating User: " + err.message,
+            message: "> Error While Creating User: " + err.message,
 
         })
     }
@@ -109,11 +109,13 @@ async function signin(req, res) {
             })
         }
 
+        throw new Error("Wrong Credentials/ No user Found")
+
     } catch (err) {
         console.log("> Error While Signing User: " + err.message)
         return res.status(500).json({
             success: false,
-            msg: "Error While Signing User: " + err.message,
+            message: "Error: " + err.message,
 
         })
     }
