@@ -43,12 +43,8 @@ function Signup() {
             }
 
         } catch (error) {
-            if (error.response && error.response.status === 411) {
-                toast.error('Email already in Use.');
-            } else {
-                console.error('Error:', error.message);
-                toast.error('Error:', error.message);
-            }
+            console.error('Error:', error.response.data);
+            toast.error('Error:', error.response.data.message);
         }
     }
 
