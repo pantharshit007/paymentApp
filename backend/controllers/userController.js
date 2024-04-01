@@ -40,12 +40,14 @@ async function getUserInfo(req, res) {
         const users = await User.find({
             $or: [{
                 firstName: {
-                    "$regex": filter
+                    "$regex": filter,
+                    "$options": "i" // Case-insensitive matching
                 }
             },
             {
                 lastName: {
-                    "$regex": filter
+                    "$regex": filter,
+                    "$options": "i" // Case-insensitive matching
                 },
             }]
         })

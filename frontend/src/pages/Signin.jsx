@@ -47,7 +47,7 @@ function Signin() {
 
     return (
         <div className='bg-slate-400 h-screen w-full flex justify-center items-center'>
-            <div className='flex justify-center w-full'>
+            <div className='flex justify-center w-full '>
                 <div className="rounded-lg bg-white w-96 text-center p-2 h-max px-4 ">
                     <Heading label={"Sign In"} />
                     <SubHeading label={"Enter Credentials to access your account"} />
@@ -68,7 +68,7 @@ function Signin() {
                 {/* Sample Login Credential */}
                 <div className=' text-2xl text-white cursor-pointer h-min'
                     onClick={() => setShowBox(!showBox)} > ⓘ </div>
-                <div className={` top-0  bg-blue-50  h-min w-min py-2 px-3 ${showBox ? 'block' : 'hidden'}`}>
+                <div className={` top-0 bg-blue-50 rounded-sm h-min min-w-min w-[18rem] py-2 px-3 ${showBox ? 'block' : 'hidden'}`}>
                     <p className='font-semibold text-red-600'>Sample Credentials:</p>
                     <code className='text-pay-default'>
                         {`
