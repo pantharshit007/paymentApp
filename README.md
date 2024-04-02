@@ -35,7 +35,7 @@ A simple demo payment app inspired by payTM.
 
 ## Usage
 
-In order to run the app on your system you will be required to have a mongoDb url handy and other environment variables. You will be able to find them in `.env.example` file in **/backend**
+In order to run the app on your system you will be required to have a MongoDB url handy and other environment variables. You will be able to find them in `.env.example` file in **/backend**
 
 ```
 MONGODB_URL =
@@ -43,19 +43,19 @@ PORT =
 JWT_SECRET =
 ```
 
-Once all requirement are full-filled just run the below command in both terminals:
+Once all requirements are full-filled just run the below command in both terminals:
 
 ```
 npm run dev
 ```
 
-> hope you won't stuck on any error even if you do it will be most likely in backend. ✨
+> hope you won't stuck on any error even if you do it will be most likely in the backend. ✨
 
 ## Features
 
-- user can create account (`SignIn/Signup`)
-- transfer money to different user (Dynamic Searching)
-- user Authentication via `jwt` token
+- user can create an account (`SignIn/Signup`)
+- transfer money to different users (Dynamic Searching)
+- User authentication via `jwt` token
 - proper notification or error/successful events
 
 ## Contributing
@@ -72,7 +72,8 @@ If you'd like to contribute to this project, please follow these guidelines:
 ## Todo
 
 - Enable OTP based Authentication of Email, so that DB doesn't populate with random test emails
-- This will be easier since first TODO is done: send a mail to user's email everytime a transaction is initiated.
+- This will be easier since the first TODO is done: send a mail to the user's email every time a transaction is initiated.
+- Implement Debouncing on User Search.
 
 ## धन्यवाद (Thankyou) ✨
 
