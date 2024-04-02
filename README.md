@@ -38,9 +38,9 @@ A simple demo payment app inspired by payTM.
 In order to run the app on your system you will be required to have a MongoDB url handy and other environment variables. You will be able to find them in `.env.example` file in **/backend**
 
 ```
-MONGODB_URL =
-PORT =
-JWT_SECRET =
+MONGODB_URL = mongodb://0.0.0.0:27017/paytmDB
+PORT = 
+JWT_SECRET = 
 ```
 
 Once all requirements are full-filled just run the below command in both terminals:
