@@ -8,7 +8,6 @@
 #### Request
 
 POST `/api/v1/user/signup`
-Content-Type: application/json
 
 ```
 {
@@ -24,13 +23,9 @@ Content-Type: application/json
 
 ```
 {
-  "success": true,
-  "message": "Account created successfully",
-  "user": {
-    "firstName": "John",
-    "lastName": "Doe",
-    "username": "johndoe@example.com"
-  }
+  success: true,
+  msg: "User created successfully",
+  token: token,
 }
 ```
 
@@ -39,7 +34,7 @@ Content-Type: application/json
 #### Request
 
 POST `/api/v1/account/transfer`
-Content-Type: application/json
+
 Authorization: Bearer `<JWT_TOKEN>`
 
 ```
@@ -53,7 +48,7 @@ Authorization: Bearer `<JWT_TOKEN>`
 
 ```
 {
-  "recipientId": "recipient_user_id",
-  "amount": 100
+  success: true,
+  msg: "Transfrer Successful."
 }
 ```
