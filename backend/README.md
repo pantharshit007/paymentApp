@@ -1,7 +1,7 @@
 ## TODO:
 
 - Hashing of Password in Db
-- Fixing the issue with transaction in Db (right now Transaction feature can't be implemented)
+- Fixing the issue with the transaction in Db (right now Transaction feature can't be implemented)
 
 ### Endpoint 1: Create Account
 
@@ -38,7 +38,7 @@ Content-Type: application/json
 
 #### Request
 
-POST `/api/v1/transaction/transfer`
+POST `/api/v1/account/transfer`
 Content-Type: application/json
 Authorization: Bearer `<JWT_TOKEN>`
 
