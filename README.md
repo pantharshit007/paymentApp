@@ -7,6 +7,7 @@ A simple demo payment app inspired by payTM.
 - [Installation](#installation)
 - [Usage](#usage)
 - [Features](#features)
+- [Images](#images)
 - [Contributing](#contributing)
 - [Todo](#todo)
 
@@ -59,6 +60,28 @@ npm run dev
 - transfer money to different users (Dynamic Searching)
 - User authentication via `jwt` token
 - proper notification or error/successful events
+
+## Images
+
+- _Home_
+
+![Home](./frontend/public/img/home.png)
+
+- _SignIn_
+
+![SignIn](./frontend/public/img/signin.png)
+
+- _SignUp_
+
+![SignUp](./frontend/public/img/signup.png)
+
+- _Dashboard_
+
+![Dashboard](./frontend/public/img/dashboard.png)
+
+- _Send Money_
+
+![Send Money](./frontend/public/img/sent.png)
 
 ## Contributing
 
