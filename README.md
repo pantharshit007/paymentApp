@@ -42,7 +42,7 @@ MONGODB_URL = mongodb://0.0.0.0:27017/paytmDB
 PORT = 
 JWT_SECRET = 
 ```
-
+**Remember I used `PORT=4000` and called all backend calls using it so use this until you change it in `FE`**
 Once all requirements are full-filled just run the below command in both terminals:
 
 ```
