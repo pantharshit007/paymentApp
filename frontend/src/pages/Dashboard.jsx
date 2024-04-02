@@ -3,6 +3,7 @@ import NavBar from '../components/NavBar'
 import Balance from '../components/Balance'
 import Users from '../components/Users'
 import axios from 'axios'
+import BACKEND_URL from '../../public/apiConfig'
 
 function Dashboard() {
     const [balance, setBalance] = useState("00")
@@ -10,7 +11,7 @@ function Dashboard() {
     const [username, setUsername] = useState('')
 
     useEffect(() => {
-        const URL = "http://localhost:4000/api/v1/account/balance"
+        const URL = BACKEND_URL + "account/balance"
         const token = localStorage.getItem('token')
         axios.get(URL, {
             headers: {

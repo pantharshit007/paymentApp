@@ -7,11 +7,12 @@ import Warning from '../components/Warning'
 import { useNavigate } from 'react-router-dom'
 import axios from "axios"
 import toast from 'react-hot-toast';
+import BACKEND_URL from '../../public/apiConfig'
 
 function Signin() {
     const navigate = useNavigate();
     const [showBox, setShowBox] = useState(false);
-    const URL = "http://localhost:4000/api/v1/user/signin";
+    const URL = BACKEND_URL + "user/signin";
 
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');

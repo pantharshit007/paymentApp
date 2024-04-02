@@ -3,6 +3,7 @@ import Heading from '../components/Heading'
 import { useSearchParams, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import toast from 'react-hot-toast'
+import BACKEND_URL from '../../public/apiConfig'
 
 function SendMoney() {
     const [searchParams] = useSearchParams();
@@ -12,7 +13,7 @@ function SendMoney() {
     const navigate = useNavigate();
 
     async function submitHandler() {
-        const URL = "http://localhost:4000/api/v1/account/transfer"
+        const URL = BACKEND_URL + "account/transfer"
         const accessToken = localStorage.getItem('token');
 
         try {
@@ -26,7 +27,7 @@ function SendMoney() {
             });
 
             if (response.status === 200) {
-                console.log("Transaction success");
+                // console.log("Transaction success");
                 toast.success("Transfer successful");
             }
 

@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import UserCard from './UserCard'
 import axios from 'axios'
+import BACKEND_URL from '../../public/apiConfig'
+
 
 function Users({ userId }) {
-    const URL = "http://localhost:4000/api/v1/user/bulk?filter="
+    const URL = BACKEND_URL + "user/bulk?filter="
     const [userInfo, setUserInfo] = useState([])
     const [filter, setFilter] = useState('')
 

@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-
+import toast from 'react-hot-toast'
 
 function NavBar({ username }) {
     const [showModal, setShowModal] = useState(true);
@@ -9,6 +9,7 @@ function NavBar({ username }) {
     function logout() {
         localStorage.setItem('isLoggedIn', false);
         localStorage.removeItem('token');
+        toast.success("Logout Successfully!");
         navigate('/signin')
     }
 

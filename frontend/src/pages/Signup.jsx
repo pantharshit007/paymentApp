@@ -7,10 +7,11 @@ import Warning from '../components/Warning'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import toast, { Toaster } from 'react-hot-toast';
+import BACKEND_URL from '../../public/apiConfig'
 
 function Signup() {
     const navigate = useNavigate();
-    const URL = "http://localhost:4000/api/v1/user/signup";
+    const URL = BACKEND_URL + "user/signup";
 
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
