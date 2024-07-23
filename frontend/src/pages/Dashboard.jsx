@@ -3,10 +3,10 @@ import NavBar from '../components/NavBar'
 import Balance from '../components/Balance'
 import Users from '../components/Users'
 import axios from 'axios'
-import BACKEND_URL from '../../public/apiConfig'
+import BACKEND_URL from '../utils/apiConfig'
 
 function Dashboard() {
-    const [balance, setBalance] = useState("00")
+    const [balance, setBalance] = useState(0)
     const [loggedInUserId, setLoggedInUserId] = useState(null)
     const [username, setUsername] = useState('')
 
@@ -29,7 +29,7 @@ function Dashboard() {
             .catch(error => {
                 console.error('Error fetching balance:', error.message);
             });
-    }, []);
+    }, [balance]);
 
 
     return (

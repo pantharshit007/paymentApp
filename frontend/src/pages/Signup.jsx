@@ -7,7 +7,7 @@ import Warning from '../components/Warning'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import toast, { Toaster } from 'react-hot-toast';
-import BACKEND_URL from '../../public/apiConfig'
+import BACKEND_URL from '../utils/apiConfig'
 
 function Signup() {
     const navigate = useNavigate();

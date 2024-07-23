@@ -3,13 +3,14 @@ import Heading from '../components/Heading'
 import { useSearchParams, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import toast from 'react-hot-toast'
-import BACKEND_URL from '../../public/apiConfig'
+import BACKEND_URL from '../utils/apiConfig'
 
 function SendMoney() {
     const [searchParams] = useSearchParams();
     const id = searchParams.get('id');
     const name = searchParams.get('name');
     const [amount, setAmount] = useState(0);
+    const [success, setSuccess] = useState(null);
     const navigate = useNavigate();
 
     async function submitHandler() {
@@ -28,6 +29,7 @@ function SendMoney() {
 
             if (response.status === 200) {
                 // console.log("Transaction success");
+                setSuccess(true);
                 toast.success("Transfer successful");
             }
 
@@ -72,6 +74,7 @@ function SendMoney() {
 
                                 <input type="number" id="amount" placeholder='Enter Amount'
                                     onChange={(e) => setAmount(e.target.value)}
+                                    value={success && 0}
                                     className='flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm' />
 
                             </div>

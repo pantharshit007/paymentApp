@@ -7,7 +7,7 @@ function Balance({ amount }) {
                 Balance:
             </div>
             <div className="font-semibold ml-4 text-lg">
-                ₹ {amount}
+                ₹ {amount.toFixed(2)}
             </div>
         </div>
     )
